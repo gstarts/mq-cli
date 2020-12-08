@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhzn.soft.project.mapper.SaveMessageMapper">
+
+
+    <insert id="insertMessageHistory" parameterType="MessageHistory" useGeneratedKeys="true" keyProperty="id">
+        insert into message_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="queueName  != null  and queueName  != ''">queue_name,</if>
+        <if test="body   != null  and body   != ''">body,</if>
+        <if test="locationId   != null  and locationId   != ''">location_id,</if>
+        <if test="status   != null  and status   != ''">status,</if>
+        created_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="queueName  != null  and queueName  != ''">#{queueName},</if>
+            <if test="body   != null  and body   != ''">#{body},</if>
+            <if test="locationId   != null  and locationId   != ''">#{locationId},</if>
+            <if test="status   != null  and status   != ''">#{status},</if>
+            now()
+        </trim>
+    </insert>
+</mapper>
